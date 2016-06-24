@@ -16,8 +16,8 @@ $(document).ready(function(){
     // snake array
     var snakeArray;
 
-    //initialize, call other functions
-    $('a').on('click',function init(){
+    //startGameialize, call other functions
+    $('a').on('click',function startGame(){
         $('#overlayStart').fadeOut(200);
         $('#overlayEnd').fadeOut(200);
         direction = "right";
@@ -46,8 +46,12 @@ $(document).ready(function(){
         food = {
             x: Math.round(Math.random() * (width-celWidth)/ celWidth),
             y: Math.round(Math.random() * (height-celWidth) / celWidth)
+
         };
+
+
     }
+
 
     // paint snake
     function paint(){
@@ -69,11 +73,13 @@ $(document).ready(function(){
 
         // collision detection
         if(nx == -1 || nx == width/celWidth || ny == -1 || ny == height/celWidth || checkCollision(nx, ny, snakeArray)){
-            //init();
+            //startGame();
             // final score insert
             $('#final_score').html(score);
             //overlay show
             $('#overlayEnd').fadeIn(200);
+            //prevent user from playing further
+            clearInterval(game_loop);
             return;
         }
 
